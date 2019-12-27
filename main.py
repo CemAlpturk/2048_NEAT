@@ -21,10 +21,9 @@ def eval(genomes, config):
         game = Game()
         score = 0
         count = 0
-        #while (not game.ended()) and count < 5:
-        for _ in range(100):
+        while (not game.ended()) and count < 5:
             inputs = game.board.copy()
-            output = net.activate(inputs.reshape(-1, 1))
+            output = net.activate(scale(inputs.reshape(-1, 1)))
             direction = directions[np.argmax(output)]
             game.move(direction)
             if game.score == score:
@@ -33,7 +32,6 @@ def eval(genomes, config):
             else:
                 score = game.score
                 count = 0
-        #print(count)
         genome.fitness = int(score)
 
 

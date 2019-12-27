@@ -14,8 +14,16 @@ class Game:
         self.insert_tile()
         #self.print_board()
 
+    def num_empty(self):
+        num = 0
+        for row in self.board:
+            for cell in row:
+                if cell == 0:
+                    num += 1
+        return num
+
     def insert_tile(self):
-        if self.ended():
+        if self.num_empty() == 0:
             return
         x, y = np.random.randint(0, self.size, 2)
         while self.board[x][y] != 0:
@@ -157,6 +165,6 @@ class Game:
         if self.check_left() or self.check_right() or self.check_up() or self.check_down():
             return False
         else:
-            print("ended")
+            #print("ended")
             return True
 
